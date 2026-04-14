@@ -20,7 +20,6 @@ class Todo {
   }
 
   _generateCheckboxEl() {
-    this._todoCheckboxEl = this._todoElement.querySelector(".todo__completed");
     this._todoLabel = this._todoElement.querySelector(".todo__label");
     this._todoCheckboxEl.checked = this._data.completed;
     this._todoCheckboxEl.id = `todo-${this._data.id}`;
@@ -34,13 +33,14 @@ class Todo {
 
     const todoNameEl = this._todoElement.querySelector(".todo__name");
     const todoDate = this._todoElement.querySelector(".todo__date");
-    const todoDeleteBtn = this._todoElement.querySelector(".todo__delete-btn");
 
-    todoNameEl.textContent = this._data.name;
-    if (this._data.dueDate) {
-      todoDate.textContent = this._data.dueDate;
+    const date = this._data.date ? new Date(this._data.date) : null;
+    if (date && !isNaN(date.getTime())) {
+      todoDate.textContent = date.toLocaleDateString();
+      todoDate.hidden = false;
     } else {
-      todoDate.style.display = "none";
+      todoDate.textContent = "";
+      todoDate.hidden = true;
     }
 
     this._generateCheckboxEl();
