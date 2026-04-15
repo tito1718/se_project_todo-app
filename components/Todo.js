@@ -20,6 +20,7 @@ class Todo {
   }
 
   _generateCheckboxEl() {
+    this._todoCheckboxEl = this._todoElement.querySelector(".todo__completed");
     this._todoLabel = this._todoElement.querySelector(".todo__label");
     this._todoCheckboxEl.checked = this._data.completed;
     this._todoCheckboxEl.id = `todo-${this._data.id}`;
@@ -33,6 +34,7 @@ class Todo {
 
     const todoNameEl = this._todoElement.querySelector(".todo__name");
     const todoDate = this._todoElement.querySelector(".todo__date");
+    todoNameEl.textContent = this._data.name;
 
     const date = this._data.date ? new Date(this._data.date) : null;
     if (date && !isNaN(date.getTime())) {
